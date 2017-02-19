@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var robinhood = require('./lib/robinhood');
+var robinhood = require('robinhood');
 var fs = require('fs');
 
 var index = require('./routes/index');
@@ -17,7 +17,9 @@ app.set('view engine', 'jade');
 
 // create robinhood wrapper
 var credentials = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-app.locals.robinhood = robinhood.make(credentials);
+robinhood(credentials, function() {
+  app.locals.robinhood = robinhood(null);
+});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -28,7 +30,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
