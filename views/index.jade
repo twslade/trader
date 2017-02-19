@@ -1,5 +1,43 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div.top
+    form.form-horizontal(method="post", id="submitOrder")
+      label Symbol
+      input.span3(id="symbol", type="text", name="symbol", placeholder="Stock symbol")
+      label Type
+      select.span3()
+      label Price
+      input.span3(id="price", type="text", name="price" placeholder="price")
+      input.btn(type="submit", value="Buy")
+  div.container
+    div.content
+      table.table.table-striped
+        thead
+          tr
+            th Symbol
+            th Type
+            th Price Paid
+            th Current Price
+            th Shares
+            th Unrealized Gain
+            th Status
+        tbody
+          tr
+            td AMD
+            td Buy
+            td $13.99
+            td $14.50
+            td 10
+            td $50
+            td Closed
+          tr
+            td NVDA
+            td Buy
+            td $89.59
+            td $89.50
+            td 10
+            td N/A
+            td Processing
+
+  div.footer
