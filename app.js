@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var robinhood = require('robinhood');
 var fs = require('fs');
 
 var index = require('./routes/index');
@@ -16,10 +15,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // create robinhood wrapper
-var credentials = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-robinhood(credentials, function() {
-  app.locals.robinhood = robinhood(null);
-});
+app.locals.credentials = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
