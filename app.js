@@ -8,7 +8,6 @@ var robinhood = require('./lib/robinhood');
 var fs = require('fs');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
